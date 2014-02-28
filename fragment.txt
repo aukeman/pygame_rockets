@@ -1,0 +1,20 @@
+varying vec3 normal;
+void main(){
+
+  vec3 n = normalize(normal);
+  vec3 l = normalize(gl_LightSource[0].position).xyz;
+
+  float d = ceil(dot(l,n));
+
+  float intensity = 1.0;
+
+  if ( d <  0.25 )
+  {
+    intensity = 0.5;
+  }
+
+  gl_FragColor = vec4(gl_FrontMaterial.ambient[0]*intensity,
+                      gl_FrontMaterial.ambient[1]*intensity,
+                      gl_FrontMaterial.ambient[2]*intensity,
+                      1.0);
+}
