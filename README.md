@@ -5,8 +5,6 @@ multiplayer "asteroids"-derived game written using pygame
 
 ![screenshot 1](https://github.com/aukeman/pygame_rockets/blob/master/screenshot_1.png?raw=true "screenshot 1")
 
-main method is in python_rockets.py.
-
 Usage:
 ------
 
@@ -52,3 +50,9 @@ Controls:
 
 TODOs:
 ------
+-  when running fullscreen, the game won't detect when you're trying to quit (escape), and you have to kill the process
+-  rendering is pretty slow.  on a beefy video card it works ok, but the frame rate really drops on anything else.  I'm sure the opengl code could be tightened up quite a bit.  In the meantime, it helps to suppress drawing the planets in the background.
+-  the joystick assumes a gamepad with two analogue sticks. should probably account for regular 2-axis joysticks
+-  the tractor beam doesn't do anything.  but at least it looks cool
+-  asteroid/ship collision detection isn't too great
+-  need to add some sort of goal :)
