@@ -1,4 +1,4 @@
-import pygame, global_configuration
+import pygame, config
 from OpenGL.GL import *
 
 from OpenGL.GL.shaders import *
@@ -89,7 +89,7 @@ class OBJ:
         glPolygonMode( GL_BACK, GL_LINE )
         glEnable( GL_LINE_SMOOTH )
 
-        if global_configuration.draw_toon_shading_outlines:
+        if config.draw_toon_shading_outlines:
 
             glDisable(GL_TEXTURE_2D)
             glCullFace(GL_FRONT)

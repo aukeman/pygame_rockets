@@ -1,4 +1,4 @@
-import pygame, math, gl_utilities, random, new, global_configuration
+import pygame, math, gl_utilities, random, new, config
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GL.shaders import *
@@ -27,11 +27,11 @@ def main():
 
     import sys
 
-    global_configuration.load_from_command_line()
+    config.load_from_command_line()
     
     pygame.mixer.pre_init(buffer=1024)
 
-    if global_configuration.fullscreen:
+    if config.fullscreen:
         gl_display_flags=HWSURFACE|OPENGL|DOUBLEBUF|FULLSCREEN
     else:
         gl_display_flags=HWSURFACE|OPENGL|DOUBLEBUF
@@ -50,15 +50,15 @@ def main():
 
     gravity=Vector2D(0.0,0.0)
 
-    goodguy_control=global_configuration.player_1_control
-    badguy_control=global_configuration.player_2_control
+    goodguy_control=config.player_1_control
+    badguy_control=config.player_2_control
 
     starfield = None
-    if global_configuration.draw_starfield:
+    if config.draw_starfield:
         starfield=Starfield(viewport, 100)
 
     planets=[]
-    if global_configuration.draw_planets:
+    if config.draw_planets:
         planets.append(Planet("planet.obj",
                               Vector2D(random.uniform(-15, 15),
                                        random.uniform(-15, 15)), 
@@ -82,7 +82,7 @@ def main():
                               60.0))
 
     asteroids=[]
-    for idx in range(global_configuration.initial_number_of_asteroids):  
+    for idx in range(config.initial_number_of_asteroids):  
       asteroids.append( Asteroid("asteroid.obj",
                                  Vector2D(random.uniform(-15, 15),
                                           random.uniform(-15, 15)),
@@ -108,7 +108,7 @@ def main():
                      (0.5, 0.5, 1.0)) ]
     rockets[0].position=Vector2D(-2.5, 0.0)
                      
-    if global_configuration.enable_player_2:
+    if config.enable_player_2:
         rockets.append( Rocket("rocket_canopy_badguy.obj",
                                gravity,
                                maximum_speed,
@@ -167,7 +167,7 @@ def main():
                 asteroid.draw()
 
                        
-            if global_configuration.draw_bounding_boxes:
+            if config.draw_bounding_boxes:
                 draw_bounding_box( asteroid.bounding_box )
 		
 
@@ -180,7 +180,7 @@ def main():
             glClear(GL_DEPTH_BUFFER_BIT)
             rocket.draw()
 
-            if global_configuration.draw_bounding_boxes:
+            if config.draw_bounding_boxes:
                  draw_bounding_box( rocket.bounding_box )
 
 

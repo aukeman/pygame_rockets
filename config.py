@@ -74,7 +74,7 @@ def load_from_command_line():
             player_2_control=_get_control(value)
         
             if player_2_control is None:
-                print >>sys.stderr, "unable to configure controls for player 1"
+                print >>sys.stderr, "unable to configure controls for player 2"
                 sys.exit(1)
 
 def _usage_string():
@@ -109,7 +109,7 @@ def _get_control( control_type_string ):
         if _joystick_controls.is_valid():
             result=_joystick_controls
         else:
-            print >>sys.stderr, "Joystick is configured"
+            print >>sys.stderr, "Joystick is not configured"
     else:
             print >>sys.stderr, "unknown control type (\"%s\")" % value
 
