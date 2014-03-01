@@ -8,6 +8,8 @@ _wads_controls=KeyboardControl(WADS)
 _joystick_controls=JoystickControl() 
 
 fullscreen = False
+
+enable_shaders=True
     
 draw_bounding_boxes = False
 draw_planets = True
@@ -24,6 +26,7 @@ player_2_control = _wads_controls
 def load_from_command_line():
 
     global fullscreen
+    global enable_shaders
     global draw_bounding_boxes
     global draw_planets
     global draw_starfield
@@ -33,7 +36,7 @@ def load_from_command_line():
     global player_1_control
     global player_2_control
 	
-    (opts,args) = getopt(sys.argv[1:], "hfsbptoa:1:2:") 
+    (opts,args) = getopt(sys.argv[1:], "hfsSbptoa:1:2:") 
 
     for flag,value in opts:
 
@@ -43,6 +46,9 @@ def load_from_command_line():
             
         elif flag=="-f":
             fullscreen=True
+
+        elif flag=="-S":
+            enable_shaders=False
 
         elif flag=="-s":
             draw_starfield=False
@@ -78,10 +84,11 @@ def load_from_command_line():
 
 def _usage_string():
     return """Usage:
-%s -h | [-f] [-b] [-s] [-p] [-t] [-o] [-a <number of asteroids>] [-1 arrows|wads|joystick] [-2 arrows|wads|joystick]
+%s -h | [-f] [-S] [-b] [-s] [-p] [-t] [-o] [-a <number of asteroids>] [-1 arrows|wads|joystick] [-2 arrows|wads|joystick]
     
 -h   this message
 -f   fullscreen
+-S   disable open gl shaders
 -b   draw bounding boxes
 -s   suppress drawing starfield
 -p   suppress drawing planets

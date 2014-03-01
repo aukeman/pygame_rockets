@@ -10,7 +10,7 @@ class Planet:
 
     def __init__(self, obj_file, position, scale, rotate_period=0.0, moons=[]):
 
-        self.model=OBJ("./obj_files", obj_file)
+        self.model=OBJ("./assets", obj_file)
 
         self.position=position
         self.scale=scale
@@ -20,7 +20,7 @@ class Planet:
 
         self.moons=moons
 
-    @gl_utilities.shader_configuration("./vertex.txt", "./fragment.txt")
+    @gl_utilities.shader_configuration("./shaders/vertex.txt", "./shaders/fragment.txt")
     def draw(self):
 
         glPushMatrix()
