@@ -7,7 +7,6 @@ _arrows_controls=KeyboardControl(ARROWS)
 _wads_controls=KeyboardControl(WADS)
 _joystick_controls=JoystickControl() 
 
-#def __init__():
 fullscreen = False
     
 draw_bounding_boxes = False
