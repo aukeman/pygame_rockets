@@ -8,6 +8,7 @@ multiplayer "asteroids"-derived game written using pygame
 main method is in python_rockets.py.
 
 Usage:
+------
 
     pygame_rockets.py -h | [-f] [-S] [-b] [-s] [-p] [-t] [-o] [-a <number of asteroids>] [-1 arrows|wads|joystick] [-2 arrows|wads|joystick]
     
@@ -26,22 +27,23 @@ Usage:
 ![screenshot 2](https://github.com/aukeman/pygame_rockets/blob/master/screenshot_2.png?raw=true "screenshot 2")
 
 Controls:
+---------
 
-arrow keys:
+### arrow keys:
 -  Rotate Left: left arrow
 -  Rotate Right: right arrow
 -  Thrust: up arrow
 -  Tractor beam: down arrow
 -  Fire: spacebar
 
-WADS keys:
+### WADS keys:
 -  Rotate Left: a
 -  Rotate Right: d
 -  Thrust: w
 -  Tractor beam: s
 -  Fire: left control
 
-Joystick:
+### Joystick:
 -  Rotate Left: joystick left
 -  Rotate Right: joystick right
 -  Thrust: joystick up
@@ -49,3 +51,4 @@ Joystick:
 -  Fire: fire button
 
 TODOs:
+------
