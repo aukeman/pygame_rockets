@@ -13,8 +13,15 @@ void main(){
     intensity = 0.5;
   }
 
-  gl_FragColor = vec4(gl_FrontMaterial.ambient[0]*intensity,
-                      gl_FrontMaterial.ambient[1]*intensity,
-                      gl_FrontMaterial.ambient[2]*intensity,
+/*
+  gl_FragColor = vec4(gl_FrontMaterial.diffuse[0]*intensity,
+                      gl_FrontMaterial.diffuse[1]*intensity,
+                      gl_FrontMaterial.diffuse[2]*intensity,
                       1.0);
+*/
+
+  gl_FragColor = vec4( gl_Color[0]*intensity,
+                       gl_Color[1]*intensity,
+                       gl_Color[2]*intensity,
+                       1.0 );
 }

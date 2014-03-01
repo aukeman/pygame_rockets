@@ -90,21 +90,21 @@ class OBJ:
         glEnable( GL_LINE_SMOOTH )
 
         glDisable(GL_TEXTURE_2D)
-        glCullFace(GL_FRONT)
-        glColor(0.25, 0.25, 0.25, 1.0)
-        glLineWidth(5.0)
+#        glCullFace(GL_FRONT)
+#        glColor(0.25, 0.25, 0.25, 1.0)
+#        glLineWidth(2.0)
 
-        for face in self.faces:
-            vertices, normals, texture_coords, material = face
+#       for face in self.faces:
+#           vertices, normals, texture_coords, material = face
 
-            glBegin(GL_POLYGON)
-            for i in range(len(vertices)):
-                if normals[i] > 0:
-                    glNormal3fv(self.normals[normals[i] - 1])
-                if texture_coords[i] > 0:
-                    glTexCoord2fv(self.texcoords[texture_coords[i] - 1])
-                glVertex3fv(self.vertices[vertices[i] - 1])
-            glEnd()
+#            glBegin(GL_POLYGON)
+#            for i in range(len(vertices)):
+#                if normals[i] > 0:
+#                    glNormal3fv(self.normals[normals[i] - 1])
+#                if texture_coords[i] > 0:
+#                    glTexCoord2fv(self.texcoords[texture_coords[i] - 1])
+#                glVertex3fv(self.vertices[vertices[i] - 1])
+#            glEnd()
 
         
         glEnable(GL_TEXTURE_2D)
@@ -122,7 +122,7 @@ class OBJ:
             else:
                 # just use diffuse colour
                 glColor(*mtl['Kd'])
- 
+  
             glBegin(GL_POLYGON)
             for i in range(len(vertices)):
                 if normals[i] > 0:

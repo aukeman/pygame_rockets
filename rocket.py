@@ -261,7 +261,6 @@ def main():
                                            screen_extents=(-20,20,-20,20),
                                            display_flags=HWSURFACE|OPENGL|DOUBLEBUF)
 
-
     gl_utilities.setup_light( gl_light_index=GL_LIGHT0,
                               position=(-40,200,100,1.0) )
 
@@ -326,8 +325,10 @@ def main():
     goodguy.position=Vector2D(-2.5, 0.0)
     badguy.position=Vector2D(2.5, 0.0)
 
-#    rockets=[goodguy, badguy]
-    rockets=[]
+    rockets=[goodguy, badguy]
+
+    asteroids=[]
+    planets=[]
 
     clock=pygame.time.Clock()
 
@@ -377,15 +378,15 @@ def main():
 
             _draw_bounding_box( asteroid.bounding_box )
 
-            print "%5.1f, %5.1f -> %5.1f, %5.1f" % (asteroid.bounding_box.lower_left.x,
-                                                    asteroid.bounding_box.lower_left.y,
-                                                    asteroid.bounding_box.upper_right.x,
-                                                    asteroid.bounding_box.upper_right.y)
+#            print "%5.1f, %5.1f -> %5.1f, %5.1f" % (asteroid.bounding_box.lower_left.x,
+#                                                    asteroid.bounding_box.lower_left.y,
+#                                                    asteroid.bounding_box.upper_right.x,
+#                                                    asteroid.bounding_box.upper_right.y)
 
-            for v in asteroid.bounding_box.transformed_vertices:
-                print " %5.1f, %5.1f" % (v.x, v.y)
+#            for v in asteroid.bounding_box.transformed_vertices:
+#                print " %5.1f, %5.1f" % (v.x, v.y)
 
-            print ""
+#            print ""
 
         for rocket in rockets:
             rocket.update(clock)
