@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import pygame, math, gl_utilities, random, new, config
 from OpenGL.GL import *
 from OpenGL.GLU import *

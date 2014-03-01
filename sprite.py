@@ -73,9 +73,9 @@ class Sprite:
 
     @staticmethod
     def init():
-        Sprite.glow=Sprite("obj_files/glow.png") 
-        Sprite.beam=Sprite("obj_files/beam.png") 
-        Sprite.plume=Sprite("obj_files/plume.png")
+        Sprite.glow=Sprite("assets/glow.png") 
+        Sprite.beam=Sprite("assets/beam.png") 
+        Sprite.plume=Sprite("assets/plume.png")
 
 def main():
 

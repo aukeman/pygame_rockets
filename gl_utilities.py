@@ -1,4 +1,4 @@
-import pygame
+import pygame, config
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GL.shaders import *
@@ -19,20 +19,9 @@ def init_gl_viewport( viewport=(800,600),
 
     srf = pygame.display.set_mode(viewport, display_flags )
 
-#     glLightfv(GL_LIGHT0, GL_POSITION,  (-40, 200, 100, 0.0))
-#     glLightfv(GL_LIGHT0, GL_AMBIENT, (0.2, 0.2, 0.2, 1.0))
-#     glLightfv(GL_LIGHT0, GL_DIFFUSE, (0.5, 0.5, 0.5, 1.0))
-#     glEnable(GL_LIGHT0)
-#     glEnable(GL_LIGHTING)
-#     glEnable(GL_DEPTH_TEST)
-
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     width, height = viewport
-#     gluPerspective(fov,
-#                    width/float(height),
-#                    clipping_planes[0],
-#                    clipping_planes[1])
 
     aspect_ratio=(float(width)/float(height))
 
@@ -57,10 +46,11 @@ def init_gl_viewport( viewport=(800,600),
 
     Sprite.init()
 
-    for (shader_filenames, shader) in _shader_registry.items():
-        if shader is None:
-            shader_files=map(load_file, shader_filenames)
-            _shader_registry[shader_filenames]=load_shaders(*shader_files)
+    if config.enable_shaders:
+        for (shader_filenames, shader) in _shader_registry.items():
+            if shader is None:
+                shader_files=map(load_file, shader_filenames)
+                _shader_registry[shader_filenames]=load_shaders(*shader_files)
 
     return ( horizontal_midpoint-(vertical_distance*aspect_ratio)/2,
              horizontal_midpoint+(vertical_distance*aspect_ratio)/2,
@@ -133,10 +123,15 @@ def shader_configuration(vertex_shader_path, fragment_shader_path):
     def _wrapped_decorator(draw_fxn):
         def _wrapped(*args,**kwargs):
 
-            setup_for_shader(_shader_registry[(vertex_shader_path,
-                                               fragment_shader_path)])
-            draw_fxn(*args,**kwargs)
-            teardown_for_shader()
+            if config.enable_shaders:
+                setup_for_shader(_shader_registry[(vertex_shader_path,
+                                                   fragment_shader_path)])
+                draw_fxn(*args,**kwargs)
+                teardown_for_shader()
+
+            else:
+                draw_fxn(*args,**kwargs)
+
         return _wrapped
     return _wrapped_decorator
 

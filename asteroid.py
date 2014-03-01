@@ -24,7 +24,7 @@ class Asteroid:
         if isinstance(obj_file,OBJ):
             self.model=obj_file
         else:
-            self.model=OBJ("./obj_files", obj_file)
+            self.model=OBJ("./assets", obj_file)
 
         self.position=position
 
@@ -52,7 +52,7 @@ class Asteroid:
 
         self.weight=weight
 
-    @gl_utilities.shader_configuration("./vertex.txt", "./fragment.txt")
+    @gl_utilities.shader_configuration("./shaders/vertex.txt", "./shaders/fragment.txt")
     def draw(self):
 
         glPushMatrix()
