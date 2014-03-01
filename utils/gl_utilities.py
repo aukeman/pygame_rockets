@@ -147,7 +147,7 @@ def debug_configuration(color=(1.0,1.0,1.0), point_size=1.0, line_width=1.0 ):
     return _wrapped_decorator
         
 def load_file(filename):
-    f=open(config.basedir + "/" + filename)
+    f=open(filename)
     lines=f.readlines()
     f.close()
     return "\n".join(lines)
