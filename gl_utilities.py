@@ -75,7 +75,10 @@ def load_shaders(vertex_shader, fragment_shader):
                           compileShader(fragment_shader, GL_FRAGMENT_SHADER))
 
 def setup_for_shader(shader):
-    glUseProgram(shader)
+    if config.enable_shaders:
+        glUseProgram(shader)
+    else:
+        glUseProgram(0)    
 
 
 def teardown_for_shader():
@@ -123,14 +126,10 @@ def shader_configuration(vertex_shader_path, fragment_shader_path):
     def _wrapped_decorator(draw_fxn):
         def _wrapped(*args,**kwargs):
 
-            if config.enable_shaders:
-                setup_for_shader(_shader_registry[(vertex_shader_path,
-                                                   fragment_shader_path)])
-                draw_fxn(*args,**kwargs)
-                teardown_for_shader()
-
-            else:
-                draw_fxn(*args,**kwargs)
+            setup_for_shader(_shader_registry[(vertex_shader_path,
+	                                           fragment_shader_path)])
+            draw_fxn(*args,**kwargs)
+            teardown_for_shader()
 
         return _wrapped
     return _wrapped_decorator
