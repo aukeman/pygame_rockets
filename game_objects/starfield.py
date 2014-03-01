@@ -1,10 +1,11 @@
-import pygame, math, gl_utilities,random
+import pygame, math, random
+
+from utils import gl_utilities
+from utils.vector2d import Vector2D
+from utils.sprite import Sprite
+
 from OpenGL.GL import *
 
-
-
-from vector2d import Vector2D
-from sprite import Sprite
 
 class Starfield:
 

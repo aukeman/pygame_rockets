@@ -1,29 +1,33 @@
 #!/usr/bin/python
 
-import pygame, math, gl_utilities, random, new, config
+import pygame, math, random, new, config
+
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GL.shaders import *
 from pygame.constants import *
 
 from pygame.mixer import Sound 
+ 
+from utils import gl_utilities
 
-from sprite import Sprite
-from controls import process_control_events, JoystickControl, KeyboardControl, ARROWS, WADS
-from collisions import BoundingPolygon
-from starfield import Starfield
-from planet import Planet
-from asteroid import Asteroid
+from utils.sprite import Sprite
+from utils.controls import process_control_events, JoystickControl, KeyboardControl, ARROWS, WADS
+from utils.collisions import BoundingPolygon
 
-from obj import OBJ
+from game_objects.starfield import Starfield
+from game_objects.planet import Planet
+from game_objects.asteroid import Asteroid
 
-from beam import Beam
-from plume import Plume
-from blaster import Blaster
+from utils.obj import OBJ
 
-from rocket import Rocket
+from game_objects.beam import Beam
+from game_objects.plume import Plume
+from game_objects.blaster import Blaster
 
-from vector2d import Vector2D
+from game_objects.rocket import Rocket
+
+from utils.vector2d import Vector2D
 
 def main():
 

@@ -1,18 +1,18 @@
-import pygame, math, gl_utilities, random, new
+import pygame, math, random, new
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
 from pygame.mixer import Sound 
 
-from collisions import BoundingPolygon
+from utils import gl_utilities
+from utils.collisions import BoundingPolygon
+from utils.obj import OBJ
+from utils.vector2d import Vector2D
 
-from obj import OBJ
+from game_objects.beam import Beam
+from game_objects.plume import Plume
+from game_objects.blaster import Blaster
 
-from beam import Beam
-from plume import Plume
-from blaster import Blaster
-
-from vector2d import Vector2D
 
 class Rocket:
 

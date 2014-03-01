@@ -1,6 +1,6 @@
 import sys
 
-from controls import JoystickControl, KeyboardControl, ARROWS, WADS
+from utils.controls import JoystickControl, KeyboardControl, ARROWS, WADS
 from getopt import getopt
 
 _arrows_controls=KeyboardControl(ARROWS)

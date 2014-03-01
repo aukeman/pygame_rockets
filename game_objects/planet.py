@@ -1,10 +1,11 @@
-from obj import OBJ
-import pygame, math, gl_utilities
+import pygame, math
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-from vector2d import Vector2D
+from utils import gl_utilities
+from utils.vector2d import Vector2D
+from utils.obj import OBJ
 
 class Planet:
 

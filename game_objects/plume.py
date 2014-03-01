@@ -1,7 +1,7 @@
 import pygame, math
 from OpenGL.GL import *
 
-from sprite import Sprite
+from utils.sprite import Sprite
 
 class Plume:
 
