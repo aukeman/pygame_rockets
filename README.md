@@ -1,7 +1,16 @@
 pygame_rockets
 ==============
 
-multiplayer "asteroids"-derived game written using pygame 
+A multiplayer "asteroids"-derived game written using pygame.  I wrote this a couple of years ago when I was doing some Python scripting at work to help get more familiar with the language.
+
+It seemed like something I should clean up a little and put on github so here it is.
+
+Dependencies:
+-------------
+-  Python 2.7 (might work with an earlier version; but I tested with 2.7)
+-  pygame 1.9.1
+-  PyOpenGL 3.1.0
+
 
 ![screenshot 1](https://github.com/aukeman/pygame_rockets/blob/master/screenshot_1.png?raw=true "screenshot 1")
 
@@ -55,4 +64,4 @@ TODOs:
 -  the joystick assumes a gamepad with two analogue sticks. should probably account for regular 2-axis joysticks
 -  the tractor beam doesn't do anything.  but at least it looks cool
 -  asteroid/ship collision detection isn't too great
--  need to add some sort of goal :)
+-  need to add points/levels or some other sort of goal :)
