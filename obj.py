@@ -1,4 +1,4 @@
-import pygame
+import pygame, global_configuration
 from OpenGL.GL import *
 
 from OpenGL.GL.shaders import *
@@ -89,24 +89,25 @@ class OBJ:
         glPolygonMode( GL_BACK, GL_LINE )
         glEnable( GL_LINE_SMOOTH )
 
-        glDisable(GL_TEXTURE_2D)
-#        glCullFace(GL_FRONT)
-#        glColor(0.25, 0.25, 0.25, 1.0)
-#        glLineWidth(2.0)
+        if global_configuration.draw_toon_shading_outlines:
 
-#       for face in self.faces:
-#           vertices, normals, texture_coords, material = face
+            glDisable(GL_TEXTURE_2D)
+            glCullFace(GL_FRONT)
+            glColor(0.25, 0.25, 0.25, 1.0)
+            glLineWidth(2.0)
 
-#            glBegin(GL_POLYGON)
-#            for i in range(len(vertices)):
-#                if normals[i] > 0:
-#                    glNormal3fv(self.normals[normals[i] - 1])
-#                if texture_coords[i] > 0:
-#                    glTexCoord2fv(self.texcoords[texture_coords[i] - 1])
-#                glVertex3fv(self.vertices[vertices[i] - 1])
-#            glEnd()
+            for face in self.faces:
+               vertices, normals, texture_coords, material = face
 
-        
+               glBegin(GL_POLYGON)
+               for i in range(len(vertices)):
+                   if normals[i] > 0:
+                       glNormal3fv(self.normals[normals[i] - 1])
+                   if texture_coords[i] > 0:
+                       glTexCoord2fv(self.texcoords[texture_coords[i] - 1])
+                   glVertex3fv(self.vertices[vertices[i] - 1])
+               glEnd()
+
         glEnable(GL_TEXTURE_2D)
         glCullFace(GL_BACK)
         glColor(1.0, 1.0, 1.0, 1.0)

@@ -1,4 +1,4 @@
-import pygame, math, gl_utilities, random, new
+import pygame, math, gl_utilities, random, new, global_configuration
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GL.shaders import *
@@ -27,11 +27,19 @@ def main():
 
     import sys
 
+    global_configuration.load_from_command_line()
+    
     pygame.mixer.pre_init(buffer=1024)
+
+    if global_configuration.fullscreen:
+        gl_display_flags=HWSURFACE|OPENGL|DOUBLEBUF|FULLSCREEN
+    else:
+        gl_display_flags=HWSURFACE|OPENGL|DOUBLEBUF
+        
 
     viewport=gl_utilities.init_gl_viewport(viewport=(800,600),
                                            screen_extents=(-20,20,-20,20),
-                                           display_flags=HWSURFACE|OPENGL|DOUBLEBUF)
+                                           display_flags=gl_display_flags)
 
     gl_utilities.setup_light( gl_light_index=GL_LIGHT0,
                               position=(-40,200,100,1.0) )
@@ -42,65 +50,75 @@ def main():
 
     gravity=Vector2D(0.0,0.0)
 
-#    goodguy_control=JoystickControl()
-    goodguy_control=KeyboardControl(WADS)
-    badguy_control=KeyboardControl(ARROWS)
+    goodguy_control=global_configuration.player_1_control
+    badguy_control=global_configuration.player_2_control
 
-    starfield=Starfield(viewport, 100)
+    starfield = None
+    if global_configuration.draw_starfield:
+        starfield=Starfield(viewport, 100)
 
-    planets=[Planet("planet.obj",
-                    Vector2D(random.uniform(-15, 15),
-                             random.uniform(-15, 15)), 0.25),
-             Planet("cold_planet.obj",
-                    Vector2D(random.uniform(-15, 15),
-                             random.uniform(-15, 15)), 0.2),
-             Planet("earth.obj",
-                    Vector2D(random.uniform(-15, 15),
-                             random.uniform(-15, 15)), 0.33, 60.0),
-             Planet("jupiter.obj",
-                    Vector2D(random.uniform(-15, 15),
-                             random.uniform(-15, 15)), 0.33, 60.0)]
+    planets=[]
+    if global_configuration.draw_planets:
+        planets.append(Planet("planet.obj",
+                              Vector2D(random.uniform(-15, 15),
+                                       random.uniform(-15, 15)), 
+                              0.25))
+                               
+        planets.append(Planet("cold_planet.obj",
+                              Vector2D(random.uniform(-15, 15),
+                                       random.uniform(-15, 15)), 
+                              0.2))
+                              
+        planets.append(Planet("earth.obj",
+                              Vector2D(random.uniform(-15, 15),
+                                       random.uniform(-15, 15)), 
+                              0.33, 
+                              60.0))
 
-    asteroids=[Asteroid("asteroid.obj",
-                        Vector2D(random.uniform(-15, 15),
-                                 random.uniform(-15, 15)),
-                        Vector2D(random.uniform(-0.5, 0.5),
-                                 random.uniform(-0.5, 0.5)),
-                        random.uniform(-15.0, 15.0),
-                        random.uniform(-15.0, 15.0),
-                        random.uniform(-15.0, 15.0),
-                        1.0,
-                        10,
-                        10.0)]
+        planets.append(Planet("jupiter.obj",
+                              Vector2D(random.uniform(-15, 15),
+                                       random.uniform(-15, 15)), 
+                              0.33, 
+                              60.0))
+
+    asteroids=[]
+    for idx in range(global_configuration.initial_number_of_asteroids):  
+      asteroids.append( Asteroid("asteroid.obj",
+                                 Vector2D(random.uniform(-15, 15),
+                                          random.uniform(-15, 15)),
+                                 Vector2D(random.uniform(-0.5, 0.5),
+                                          random.uniform(-0.5, 0.5)),
+                                 random.uniform(-15.0, 15.0),
+                                 random.uniform(-15.0, 15.0),
+                                 random.uniform(-15.0, 15.0),
+                                 1.0,
+                                 10,
+                                 10.0))
     
     goodguy_blasters=[]
     badguy_blasters=[]
 
-    goodguy=Rocket("rocket_canopy.obj",
-                   gravity,
-                   maximum_speed,
-                   maximum_acceleration,
-                   maximum_roll_rate,
-                   goodguy_control,
-                   goodguy_blasters,
-                   (0.5, 0.5, 1.0))
+    rockets=[ Rocket("rocket_canopy.obj",
+                     gravity,
+                     maximum_speed,
+                     maximum_acceleration,
+                     maximum_roll_rate,
+                     goodguy_control,
+                     goodguy_blasters,
+                     (0.5, 0.5, 1.0)) ]
+    rockets[0].position=Vector2D(-2.5, 0.0)
+                     
+    if global_configuration.enable_player_2:
+        rockets.append( Rocket("rocket_canopy_badguy.obj",
+                               gravity,
+                               maximum_speed,
+                               maximum_acceleration,
+                               maximum_roll_rate,
+                               badguy_control,
+                               badguy_blasters,
+                               (1.0, 0.5, 0.5)) )
+        rockets[1].position=Vector2D(2.5, 0.0)
 
-    badguy=Rocket("rocket_canopy_badguy.obj",
-                  gravity,
-                  maximum_speed,
-                  maximum_acceleration,
-                  maximum_roll_rate,
-                  badguy_control,
-                  badguy_blasters,
-                  (1.0, 0.5, 0.5))
-
-    goodguy.position=Vector2D(-2.5, 0.0)
-    badguy.position=Vector2D(2.5, 0.0)
-
-    rockets=[goodguy, badguy]
-
-#    asteroids=[]
-    planets=[]
 
     clock=pygame.time.Clock()
 
@@ -121,7 +139,8 @@ def main():
 
         glTranslate(0.0,0.0,-10.0)
 
-        starfield.draw()
+        if starfield is not None:
+            starfield.draw()
 
         targets=rockets+asteroids
 
@@ -146,8 +165,10 @@ def main():
                 reposition(viewport, asteroid.position)
                 
                 asteroid.draw()
-            
-            draw_bounding_box( asteroid.bounding_box )
+
+                       
+            if global_configuration.draw_bounding_boxes:
+                draw_bounding_box( asteroid.bounding_box )
 		
 
         for rocket in rockets:
@@ -159,7 +180,8 @@ def main():
             glClear(GL_DEPTH_BUFFER_BIT)
             rocket.draw()
 
-            draw_bounding_box( rocket.bounding_box )
+            if global_configuration.draw_bounding_boxes:
+                 draw_bounding_box( rocket.bounding_box )
 
 
         for blaster_list in goodguy_blasters, badguy_blasters:

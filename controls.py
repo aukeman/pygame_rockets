@@ -18,8 +18,12 @@ class JoystickControl:
 
     def __init__(self, id=0):
         pygame.joystick.init()
-        self._joystick=pygame.joystick.Joystick(id)
-        self._joystick.init()
+        
+        self._joystick = None
+
+        if id < pygame.joystick.get_count():
+            self._joystick=pygame.joystick.Joystick(id)
+            self._joystick.init()
 
         self._deadzone=0.1
 
@@ -52,6 +56,9 @@ class JoystickControl:
 
     def fire(self):
         return self._joystick.get_button(0)
+
+    def is_valid(self):
+        return self._joystick is not None
 
 ARROWS=0
 WADS=1
