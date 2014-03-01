@@ -143,7 +143,13 @@ class Rocket:
         self.bounding_box.update()
 
         if self.controls.get_beam_activated() and self.beam.is_off():
-            self.beam.angle = math.degrees(self.controls.get_beam_angle())
+            tmp_beam_angle = self.controls.get_beam_angle()
+
+            if tmp_beam_angle is None:
+                self.beam.angle = self.angle + 90
+            else:
+                self.beam.angle = math.degrees(tmp_beam_angle)
+
             self.beam.on()
         elif not self.controls.get_beam_activated():
             self.beam.off()

@@ -44,7 +44,7 @@ class JoystickControl:
     def get_beam_angle(self):
 
         if self.get_beam_activated():
-            axes=(self._joystick.get_axis(2),self._joystick.get_axis(3))
+            axes=(-self._joystick.get_axis(3), self._joystick.get_axis(2))
             return math.atan2( *axes )
         else:
             return 0.0
@@ -95,7 +95,7 @@ class KeyboardControl:
             return 0.0
 
     def get_beam_angle(self):
-        return 0.0
+        return None
 
     def get_beam_activated(self):
         return pygame.key.get_pressed()[self._down]
