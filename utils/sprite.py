@@ -1,11 +1,11 @@
-import pygame
+import pygame, config
 from OpenGL.GL import *
 
 class Sprite:
 
     def __init__( self, src_file ):
 
-        surf=pygame.image.load(src_file)
+        surf=pygame.image.load(config.basedir+"/"+src_file)
         image=pygame.image.tostring(surf,'RGBA',1)
 
         ix, iy = surf.get_rect().size

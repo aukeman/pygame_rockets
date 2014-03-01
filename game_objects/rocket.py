@@ -1,4 +1,4 @@
-import pygame, math, random, new
+import pygame, math, random, new, config
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
@@ -40,7 +40,7 @@ class Rocket:
         
         self.angle=0.0
 
-        self.model=OBJ("./assets", obj_file)
+        self.model=OBJ(config.basedir+"/assets", obj_file)
 
         self.position=Vector2D(0.0,0.0)
         self.velocity=Vector2D(0.0,0.0)
@@ -56,8 +56,8 @@ class Rocket:
         self.beam=Beam()
         self.plume=Plume()
 
-        self.blaster_sound=Sound("assets\Laser_Shoot_2.wav")
-        self.engine_sound=Sound("assets\engine.wav")
+        self.blaster_sound=Sound(config.basedir+"/assets/Laser_Shoot_2.wav")
+        self.engine_sound=Sound(config.basedir+"/assets/engine.wav")
         self.engine_sound.set_volume(0.075)
 
         self.fire_counter=3
@@ -67,7 +67,8 @@ class Rocket:
         self.beam.draw()
         self.plume.draw()
 
-    @gl_utilities.shader_configuration("./shaders/vertex.txt", "./shaders/fragment.txt")
+    @gl_utilities.shader_configuration(config.basedir+"/shaders/vertex.txt", 
+                                       config.basedir+"/shaders/fragment.txt")
     def _draw_shader(self):
         glPushMatrix()
 

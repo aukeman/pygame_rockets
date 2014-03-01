@@ -1,4 +1,4 @@
-import sys
+import sys, os
 
 from utils.controls import JoystickControl, KeyboardControl, ARROWS, WADS
 from getopt import getopt
@@ -22,6 +22,8 @@ enable_player_2 = True
 
 player_1_control = _arrows_controls
 player_2_control = _wads_controls
+
+basedir=os.path.dirname(__file__)
 
 def load_from_command_line():
 

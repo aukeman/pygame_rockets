@@ -1,4 +1,4 @@
-import pygame, math
+import pygame, math, config
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -24,7 +24,7 @@ class Asteroid:
         if isinstance(obj_file,OBJ):
             self.model=obj_file
         else:
-            self.model=OBJ("./assets", obj_file)
+            self.model=OBJ(config.basedir+"/assets", obj_file)
 
         self.position=position
 
@@ -52,7 +52,8 @@ class Asteroid:
 
         self.weight=weight
 
-    @gl_utilities.shader_configuration("./shaders/vertex.txt", "./shaders/fragment.txt")
+    @gl_utilities.shader_configuration(config.basedir+"/shaders/vertex.txt", 
+                                       config.basedir+"/shaders/fragment.txt")
     def draw(self):
 
         glPushMatrix()
