@@ -9,19 +9,43 @@ main method is in python_rockets.py.
 
 Usage:
 
-pygame_rockets.py -h | [-f] [-S] [-b] [-s] [-p] [-t] [-o] [-a <number of asteroids>] [-1 arrows|wads|joystick] [-2 arrows|wads
-|joystick]
-
-  -h   this message
-  -f   fullscreen
-  -S   disable open gl shaders
-  -b   draw bounding boxes
-  -s   suppress drawing starfield
-  -p   suppress drawing planets
-  -t   draw toon shading outlines
-  -o   one player only
-  -a   initial number of asteroids (defaults to 1)
-  -1   controls for player one (defaults to arrow keys/spacebar)
-  -2   controls for player two (defaults to WADS keys/left ctrl)
+    pygame_rockets.py -h | [-f] [-S] [-b] [-s] [-p] [-t] [-o] [-a <number of asteroids>] [-1 arrows|wads|joystick] [-2 arrows|wads|joystick]
+    
+    -h   this message
+    -f   fullscreen
+    -S   disable open gl shaders
+    -b   draw bounding boxes
+    -s   suppress drawing starfield
+    -p   suppress drawing planets
+    -t   draw toon shading outlines
+    -o   one player only
+    -a   initial number of asteroids (defaults to 1)
+    -1   controls for player one (defaults to arrow keys/spacebar)
+    -2   controls for player two (defaults to WADS keys/left ctrl)
 
 ![screenshot 2](https://github.com/aukeman/pygame_rockets/blob/master/screenshot_2.png?raw=true "screenshot 2")
+
+Controls:
+
+arrow keys:
+-  Rotate Left: left arrow
+-  Rotate Right: right arrow
+-  Thrust: up arrow
+-  Tractor beam: down arrow
+-  Fire: spacebar
+
+WADS keys:
+-  Rotate Left: a
+-  Rotate Right: d
+-  Thrust: w
+-  Tractor beam: s
+-  Fire: left control
+
+Joystick:
+-  Rotate Left: joystick left
+-  Rotate Right: joystick right
+-  Thrust: joystick up
+-  Tractor beam: 2nd stick (I wrote this using a gamepad with two analogue sticks)
+-  Fire: fire button
+
+TODOs:
